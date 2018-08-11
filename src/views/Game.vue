@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <EnergyLevel v-bind:limit="energyLimit" v-bind:amount="energy" />
     <LightLevel v-bind:limit="lightLimit" v-bind:amount="light" />
     <SNESButtons @sendMove="recieveMove"/>
