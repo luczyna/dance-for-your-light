@@ -11,7 +11,7 @@ export default {
     }
   },
   methods: {
-    log(which) {
+    logMove(which) {
       this.keylog.push(which);
     },
     detectMove() {

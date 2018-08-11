@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     recieveMove(which) {
-      this.log(which);
+      this.logMove(which);
 
       const match = this.detectMove();
       if (!match) return;
@@ -65,9 +65,6 @@ export default {
         // TODO alternate messages!
         this.messages.push(`too tired...`);
       }
-    },
-    logDanceMatch(move) {
-      console.log(move);
     }
   }
 }
