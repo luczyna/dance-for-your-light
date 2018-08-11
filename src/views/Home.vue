@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <EnergyLevel />
     <SNESButtons @sendMove="recieveMove"/>
 
     <ul v-if="messages.length">
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import EnergyLevel from '@/components/EnergyLevel.vue';
 import SNESButtons from '@/components/SNESButtons.vue';
 import DanceService from '@/services/DanceService.vue';
 
@@ -18,6 +20,7 @@ export default {
     DanceService
   ],
   components: {
+    EnergyLevel,
     SNESButtons
   },
   data: function() {
