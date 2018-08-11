@@ -58,9 +58,10 @@ export default {
       const energyBurn = this.calculateEnergyBurn(results.match.name);
 
       if (energyBurn <= this.energy) {
-        this.messages.push(`danced the ${results.match.name}`);
         this.decreaseEnergy(energyBurn);
-        // TODO manage the light
+        const response = this.judgeDance(results.useful, results.match.name);
+        this.messages.push(response);
+
       } else {
         // TODO alternate messages!
         this.messages.push(`too tired...`);

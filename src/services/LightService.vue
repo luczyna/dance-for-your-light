@@ -1,6 +1,6 @@
 <script>
 const LIMIT = 7;
-const TIME = 10000;
+const TIME = 5000;
 const SHIMEE = 1;
 const SHAKE = 1;
 const YOLO = 2;
@@ -18,7 +18,6 @@ export default {
     decreaseLight(amount = 1) {
       this.light -= amount;
 
-      // TODO add checks! no light === GAME OVER
       this.light = Math.max(this.light, 0);
     },
     increaseLight(amount = 1) {
@@ -29,31 +28,44 @@ export default {
     startLightLoop() {
       this.lightLoop = window.setInterval(() => {
         this.decreaseLight();
+        // TODO add checks! no light === GAME OVER
       }, TIME);
     },
     stopLightLoop() {
       window.clearInterval(this.lightLoop);
       this.lightLoop = null;
     },
-    // TODO set up diminishing returns for dance moves
-    judgeDance(whichDance) {
+    judgeDance(isFreshMove, whichDance) {
       let increaseBy;
+      let message;
 
-      switch (whichDance) {
-        case 'shimee':
+      if (isFreshMove) {
+        switch (whichDance.name) {
+          case 'shimee':
           increaseBy = SHIMEE;
+          message = 'shimee shimee ko ko bop';
           break;
-        case 'shake':
+          case 'shake':
           increaseBy = SHAKE;
+          message = 'shake ya booty';
           break;
-        case 'yolo':
+          case 'yolo':
           increaseBy = YOLO;
+          message = 'this is a crazy move, YOLO';
           break;
-        default:
+          default:
           increaseBy = 0;
+        }
+
+        this.increaseLight(increaseBy);
+      } else {
+        // TODO alternate phrases!
+        message = 'move not phresh!';
+        // TODO is this cruel?
+        this.decreaseLight();
       }
 
-      this.increaseLight(increaseBy);
+      return message;
     }
   }
 }
