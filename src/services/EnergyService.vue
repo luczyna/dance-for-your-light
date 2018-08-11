@@ -31,7 +31,8 @@ export default {
       }, TIME);
     },
     stopEnergyLoop() {
-      window.stopInterval(this.energyLoop);
+      window.clearInterval(this.energyLoop);
+      this.energyLoop = null;
     },
     calculateEnergyBurn(whichMove) {
       switch (whichMove) {
