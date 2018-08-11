@@ -6,7 +6,7 @@
 
 <script>
 import SNESButtons from '@/components/SNESButtons.vue';
-import DanceService from '@/services/dance-service';
+import DanceService from '@/services/DanceService.vue';
 
 export default {
   name: 'home',
