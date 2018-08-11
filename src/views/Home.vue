@@ -1,6 +1,10 @@
 <template>
   <div class="home">
     <SNESButtons @sendMove="recieveMove"/>
+
+    <ul v-if="keylog.length">
+      <li v-for="(log, index) in lastLogSet" v-bind:key="index">{{log}}</li>
+    </ul>
   </div>
 </template>
 
@@ -17,7 +21,12 @@ export default {
     SNESButtons
   },
   data: function() {
-    return {}
+    return {};
+  },
+  computed: {
+    lastLogSet: function() {
+      return this.keylog.slice(-10).reverse();
+    }
   },
   methods: {
     recieveMove(which) {
