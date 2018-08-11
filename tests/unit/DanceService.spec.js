@@ -1,11 +1,11 @@
 import { shallowMount } from '@vue/test-utils';
-import Home from '@/views/Home.vue';
+import Game from '@/views/Game.vue';
 
-describe('Dancing at Home', () => {
+describe('Dancing at Game', () => {
   let service;
 
   beforeEach(() => {
-    service = shallowMount(Home);
+    service = shallowMount(Game);
   });
 
   it('stores a log of key presses', () => {
