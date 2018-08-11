@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <EnergyLevel v-bind:limit="energyLimit" v-bind:amount="energy"/>
+    <EnergyLevel v-bind:limit="energyLimit" v-bind:amount="energy" />
+    <LightLevel  v-bind:limit="lightLimit" v-bind:amount="light" />
     <SNESButtons @sendMove="recieveMove"/>
 
     <ul v-if="messages.length">
@@ -11,18 +12,22 @@
 
 <script>
 import EnergyLevel from '@/components/EnergyLevel.vue';
+import LightLevel from '@/components/LightLevel.vue';
 import SNESButtons from '@/components/SNESButtons.vue';
 import DanceService from '@/services/DanceService.vue';
+import LightService from '@/services/LightService.vue';
 import EnergyService from '@/services/EnergyService.vue';
 
 export default {
   name: 'home',
   mixins: [
     DanceService,
-    EnergyService
+    EnergyService,
+    LightService
   ],
   components: {
     EnergyLevel,
+    LightLevel,
     SNESButtons
   },
   data: function() {
@@ -32,9 +37,11 @@ export default {
   },
   mounted() {
     this.startEnergyLoop();
+    this.startLightLoop();
   },
   beforeDestroy() {
     this.stopEnergyLoop();
+    this.stopLightLoop();
   },
   computed: {
     lastMessages: function() {
