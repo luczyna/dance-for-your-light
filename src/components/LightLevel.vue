@@ -30,6 +30,7 @@ export default {
   .light-level {
     display: flex;
     justify-content: flex-end;
+    flex-direction: row-reverse;
     height: 16px;
   }
 
@@ -40,11 +41,11 @@ export default {
     background: black;
 
     &:first-of-type {
-      border-left-width: 2px;
+      border-right-width: 2px;
     }
 
     &:last-of-type {
-      border-right-width: 2px;
+      border-left-width: 2px;
     }
 
     &.bright {
