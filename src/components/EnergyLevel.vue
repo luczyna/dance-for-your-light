@@ -1,7 +1,7 @@
 <template>
   <div class="energy-container">
     <div class="energy-level">
-      <div v-for="n of limit" class="energy" v-bind:key="n" v-bind:class="{'filled': availableEnergy >= n}"></div>
+      <div v-for="n of limit" class="energy" v-bind:key="n" v-bind:class="{'filled': amount >= n}"></div>
     </div>
 
     <p class="label">energy</p>
@@ -9,31 +9,12 @@
 </template>
 
 <script>
-const LIMIT = 10;
 
 export default {
   name: 'EnergyLevel',
-  data: function() {
-    return {
-      limit: LIMIT,
-      availableEnergy: LIMIT
-    }
-  },
-  methods: {
-    increaseEnergy(amount) {
-      this.availableEnergy += amount;
-
-      if (this.availableEnergy > this.limit) {
-        this.availableEnergy = this.limit;
-      }
-    },
-    decreaseEnergy(amount) {
-      this.availableEnergy -= amount;
-
-      if (this.availableEnergy < 0) {
-        this.availableEnergy = 0;
-      }
-    }
+  props: {
+    limit: Number,
+    amount: Number,
   }
 }
 </script>
