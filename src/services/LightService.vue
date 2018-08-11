@@ -50,7 +50,7 @@ export default {
           increaseBy = YOLO;
           break;
         default:
-
+          increaseBy = 0;
       }
 
       this.increaseLight(increaseBy);
