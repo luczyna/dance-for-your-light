@@ -46,8 +46,17 @@ export default {
       this.log(which);
 
       const match = this.detectMove();
-      if (match) {
+      if (!match) return;
+
+      const energyBurn = this.calculateEnergyBurn(match.danceMatch);
+
+      if (energyBurn <= this.energy) {
         this.messages.push(`danced the ${match.danceMatch}`);
+        this.decreaseEnergy(energyBurn);
+        // TODO manage the light
+      } else {
+        // TODO alternate messages!
+        this.messages.push(`too tired...`);
       }
     },
     logDanceMatch(move) {
