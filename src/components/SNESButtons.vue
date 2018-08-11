@@ -11,36 +11,20 @@
         <button type="button" @click="buttonPress('d')" class="control" data-control="d">d</button>
       </div>
     </div>
-
-    <ul v-if="logList.length">
-      <li v-for="(log, index) in lastLogSet" v-bind:key="index">{{log}}</li>
-    </ul>
   </div>
 </template>
 
 <script>
 export default {
   name: 'SNESButtons',
-  data: function() {
-    return {
-      logList: []
-    };
-  },
   mounted() {
     window.addEventListener('keyup', this.keyPressMapper);
   },
   beforeDestroy() {
     window.removeEventListener('keyup', this.keyPressMapper);
   },
-
-  computed: {
-    lastLogSet: function() {
-      return this.logList.slice(-10).reverse();
-    }
-  },
   methods: {
     buttonPress(which) {
-      this.logList.push(`${which} was pressed`);
       this.$emit('sendMove', which);
     },
     keyPressMapper(event) {

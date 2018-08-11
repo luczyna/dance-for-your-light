@@ -1,6 +1,10 @@
 <template>
   <div class="home">
     <SNESButtons @sendMove="recieveMove"/>
+
+    <ul v-if="messages.length">
+      <li v-for="(log, index) in lastMessages" v-bind:key="index">{{log}}</li>
+    </ul>
   </div>
 </template>
 
@@ -17,11 +21,26 @@ export default {
     SNESButtons
   },
   data: function() {
-    return {}
+    return {
+      messages: []
+    };
+  },
+  computed: {
+    lastMessages: function() {
+      return this.messages.slice(-10).reverse();
+    }
   },
   methods: {
     recieveMove(which) {
       this.log(which);
+
+      const match = this.detectMove();
+      if (match) {
+        this.messages.push(`danced the ${match.danceMatch}`);
+      }
+    },
+    logDanceMatch(move) {
+      console.log(move);
     }
   }
 }

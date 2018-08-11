@@ -28,8 +28,8 @@ describe('Dancing at Home', () => {
       service.vm.log('a');
       service.vm.log('b');
 
-      expect(service.emitted().danceMatch).toBeDefined();
-      expect(service.emitted().danceMatch[0][0]).toBe('shimee');
+      expect(service.vm.detectMove()).toBeDefined();
+      expect(service.vm.detectMove().danceMatch).toBe('shimee');
     });
 
     it('detects the move when preceeded with other moves', () => {
@@ -39,8 +39,8 @@ describe('Dancing at Home', () => {
       service.vm.log('a');
       service.vm.log('b');
 
-      expect(service.emitted().danceMatch).toBeDefined();
-      expect(service.emitted().danceMatch[0][0]).toBe('shimee');
+      expect(service.vm.detectMove()).toBeDefined();
+      expect(service.vm.detectMove().danceMatch).toBe('shimee');
     });
 
     it('ignores mismatches to the SHIMEE', () => {
@@ -48,7 +48,7 @@ describe('Dancing at Home', () => {
       service.vm.log('a');
       service.vm.log('d');
 
-      expect(service.emitted().danceMatch).not.toBeDefined();
+      expect(service.vm.detectMove()).toBeNull();
     });
   });
 
@@ -58,8 +58,8 @@ describe('Dancing at Home', () => {
       service.vm.log('a');
       service.vm.log('c');
 
-      expect(service.emitted().danceMatch).toBeDefined();
-      expect(service.emitted().danceMatch[0][0]).toBe('shake');
+      expect(service.vm.detectMove()).toBeDefined();
+      expect(service.vm.detectMove().danceMatch).toBe('shake');
     });
 
     it('detects the move when preceeded with other moves', () => {
@@ -69,8 +69,8 @@ describe('Dancing at Home', () => {
       service.vm.log('a');
       service.vm.log('c');
 
-      expect(service.emitted().danceMatch).toBeDefined();
-      expect(service.emitted().danceMatch[0][0]).toBe('shake');
+      expect(service.vm.detectMove()).toBeDefined();
+      expect(service.vm.detectMove().danceMatch).toBe('shake');
     });
 
     it('ignores mismatches to the SHAKE', () => {
@@ -78,7 +78,7 @@ describe('Dancing at Home', () => {
       service.vm.log('a');
       service.vm.log('d');
 
-      expect(service.emitted().danceMatch).not.toBeDefined();
+      expect(service.vm.detectMove()).toBeNull();
     });
   });
 
@@ -89,8 +89,8 @@ describe('Dancing at Home', () => {
       service.vm.log('a');
       service.vm.log('c');
 
-      expect(service.emitted().danceMatch).toBeDefined();
-      expect(service.emitted().danceMatch[0][0]).toBe('yolo');
+      expect(service.vm.detectMove()).toBeDefined();
+      expect(service.vm.detectMove().danceMatch).toBe('yolo');
     });
 
     it('detects the move when preceeded with other moves', () => {
@@ -100,8 +100,8 @@ describe('Dancing at Home', () => {
       service.vm.log('a');
       service.vm.log('c');
 
-      expect(service.emitted().danceMatch).toBeDefined();
-      expect(service.emitted().danceMatch[0][0]).toBe('yolo');
+      expect(service.vm.detectMove()).toBeDefined();
+      expect(service.vm.detectMove().danceMatch).toBe('yolo');
     });
 
     it('ignores mismatches to the YOLO', () => {
@@ -110,7 +110,7 @@ describe('Dancing at Home', () => {
       service.vm.log('a');
       service.vm.log('c');
 
-      expect(service.emitted().danceMatch).not.toBeDefined();
+      expect(service.vm.detectMove()).toBeNull();
     });
   });
 });
