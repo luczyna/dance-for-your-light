@@ -1,6 +1,6 @@
 <script>
 const LIMIT = 7;
-const TIME = 10000;
+const TIME = 5000;
 const SHIMEE = 1;
 const SHAKE = 1;
 const YOLO = 2;
@@ -18,7 +18,6 @@ export default {
     decreaseLight(amount = 1) {
       this.light -= amount;
 
-      // TODO add checks! no light === GAME OVER
       this.light = Math.max(this.light, 0);
     },
     increaseLight(amount = 1) {
@@ -29,31 +28,44 @@ export default {
     startLightLoop() {
       this.lightLoop = window.setInterval(() => {
         this.decreaseLight();
+        // TODO add checks! no light === GAME OVER
       }, TIME);
     },
     stopLightLoop() {
       window.clearInterval(this.lightLoop);
       this.lightLoop = null;
     },
-    // TODO set up diminishing returns for dance moves
-    judgeDance(whichDance) {
-      let increaseBy;
+    judgeDance(isFreshMove, whichDanceName) {
+      let updateLightAmount;
+      let message;
 
-      switch (whichDance) {
+      switch (whichDanceName) {
         case 'shimee':
-          increaseBy = SHIMEE;
-          break;
+        updateLightAmount = SHIMEE;
+        message = 'shimee shimee ko ko bop';
+        break;
         case 'shake':
-          increaseBy = SHAKE;
-          break;
+        updateLightAmount = SHAKE;
+        message = 'shake ya booty';
+        break;
         case 'yolo':
-          increaseBy = YOLO;
-          break;
+        updateLightAmount = YOLO;
+        message = 'this is a crazy move, YOLO';
+        break;
         default:
-          increaseBy = 0;
+        updateLightAmount = 0;
       }
 
-      this.increaseLight(increaseBy);
+      if (isFreshMove) {
+        this.increaseLight(updateLightAmount);
+      } else {
+        // TODO alternate phrases!
+        message = 'move not phresh!';
+        // TODO is this cruel?
+        this.decreaseLight(updateLightAmount);
+      }
+
+      return message;
     }
   }
 }

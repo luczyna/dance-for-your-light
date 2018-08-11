@@ -9,10 +9,10 @@ describe('Dancing at Game', () => {
   });
 
   it('stores a log of key presses', () => {
-    service.vm.log('a');
-    service.vm.log('b');
-    service.vm.log('c');
-    service.vm.log('d');
+    service.vm.logMove('a');
+    service.vm.logMove('b');
+    service.vm.logMove('c');
+    service.vm.logMove('d');
 
     expect(service.vm.keylog.length).not.toBe(0);
 
@@ -24,93 +24,110 @@ describe('Dancing at Game', () => {
 
   describe('the SHIMEE move', () => {
     it('detects the move by itself', () => {
-      service.vm.log('a');
-      service.vm.log('a');
-      service.vm.log('b');
+      service.vm.logMove('a');
+      service.vm.logMove('a');
+      service.vm.logMove('b');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('shimee');
+      expect(service.vm.detectMove().match.name).toBe('shimee');
     });
 
     it('detects the move when preceeded with other moves', () => {
-      service.vm.log('d');
-      service.vm.log('a');
-      service.vm.log('a');
-      service.vm.log('a');
-      service.vm.log('b');
+      service.vm.logMove('d');
+      service.vm.logMove('a');
+      service.vm.logMove('a');
+      service.vm.logMove('a');
+      service.vm.logMove('b');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('shimee');
+      expect(service.vm.detectMove().match.name).toBe('shimee');
     });
 
     it('ignores mismatches to the SHIMEE', () => {
-      service.vm.log('a');
-      service.vm.log('a');
-      service.vm.log('d');
+      service.vm.logMove('a');
+      service.vm.logMove('a');
+      service.vm.logMove('d');
 
-      expect(service.vm.detectMove()).toBeNull();
+      expect(service.vm.detectMove().match).toBeNull();
     });
   });
 
   describe('the SHAKE move', () => {
     it('detects the move by itself', () => {
-      service.vm.log('c');
-      service.vm.log('a');
-      service.vm.log('c');
+      service.vm.logMove('c');
+      service.vm.logMove('a');
+      service.vm.logMove('c');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('shake');
+      expect(service.vm.detectMove().match.name).toBe('shake');
     });
 
     it('detects the move when preceeded with other moves', () => {
-      service.vm.log('d');
-      service.vm.log('a');
-      service.vm.log('c');
-      service.vm.log('a');
-      service.vm.log('c');
+      service.vm.logMove('d');
+      service.vm.logMove('a');
+      service.vm.logMove('c');
+      service.vm.logMove('a');
+      service.vm.logMove('c');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('shake');
+      expect(service.vm.detectMove().match.name).toBe('shake');
     });
 
     it('ignores mismatches to the SHAKE', () => {
-      service.vm.log('c');
-      service.vm.log('a');
-      service.vm.log('d');
+      service.vm.logMove('c');
+      service.vm.logMove('a');
+      service.vm.logMove('d');
 
-      expect(service.vm.detectMove()).toBeNull();
+      expect(service.vm.detectMove().match).toBeNull();
     });
   });
 
   describe('the YOLO move', () => {
     it('detects the move by itself', () => {
-      service.vm.log('d');
-      service.vm.log('a');
-      service.vm.log('a');
-      service.vm.log('c');
+      service.vm.logMove('d');
+      service.vm.logMove('a');
+      service.vm.logMove('a');
+      service.vm.logMove('c');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('yolo');
+      expect(service.vm.detectMove().match.name).toBe('yolo');
     });
 
     it('detects the move when preceeded with other moves', () => {
-      service.vm.log('d');
-      service.vm.log('d');
-      service.vm.log('a');
-      service.vm.log('a');
-      service.vm.log('c');
+      service.vm.logMove('d');
+      service.vm.logMove('d');
+      service.vm.logMove('a');
+      service.vm.logMove('a');
+      service.vm.logMove('c');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('yolo');
+      expect(service.vm.detectMove().match.name).toBe('yolo');
     });
 
     it('ignores mismatches to the YOLO', () => {
-      service.vm.log('b');
-      service.vm.log('a');
-      service.vm.log('a');
-      service.vm.log('c');
+      service.vm.logMove('b');
+      service.vm.logMove('a');
+      service.vm.logMove('a');
+      service.vm.logMove('c');
 
-      expect(service.vm.detectMove()).toBeNull();
+      expect(service.vm.detectMove().match).toBeNull();
+    });
+  });
+
+  describe('diminishing returns', () => {
+    it('punishes players for spamming a dance', () => {
+      // play the SHIMEE move
+      service.vm.logMove('c');
+      service.vm.logMove('a');
+      service.vm.logMove('c');
+      service.vm.detectMove();
+
+      // now SPAM the SHIMEE move
+      service.vm.logMove('c');
+      service.vm.logMove('a');
+      service.vm.logMove('c');
+      const result = service.vm.detectMove();
+      expect(result.useful).toBe(false);
     });
   });
 });

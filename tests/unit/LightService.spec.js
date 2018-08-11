@@ -82,28 +82,55 @@ describe('Light at Game', () => {
   });
 
   describe('#judgeDance', () => {
-    it('determines that the shimee brings back 1 light', () => {
-      service.vm.light = 3;
-      service.vm.judgeDance('shimee');
-      expect(service.vm.light).toBe(4);
+    describe('with a phresh dance', () => {
+      const FRESH_MOVE = true;
+
+      it('determines that the shimee brings back 1 light', () => {
+        service.vm.light = 3;
+        service.vm.judgeDance(FRESH_MOVE, 'shimee');
+        expect(service.vm.light).toBe(4);
+      });
+
+      it('determines that the shake brings back 1 light', () => {
+        service.vm.light = 3;
+        service.vm.judgeDance(FRESH_MOVE, 'shake');
+        expect(service.vm.light).toBe(4);
+      });
+
+      it('determines that the yolo brings back 2 light', () => {
+        service.vm.light = 3;
+        service.vm.judgeDance(FRESH_MOVE, 'yolo');
+        expect(service.vm.light).toBe(5);
+      });
+
+      it('no light is gained if it does not recognise the move', () => {
+        service.vm.light = 3;
+        service.vm.judgeDance(FRESH_MOVE, 'unknown');
+        expect(service.vm.light).toBe(3);
+      });
     });
 
-    it('determines that the shake brings back 1 light', () => {
-      service.vm.light = 3;
-      service.vm.judgeDance('shake');
-      expect(service.vm.light).toBe(4);
+    describe('with a stanky dance, not so phresh', () => {
+      const FRESH_MOVE = false;
+
+      it('determines that the shimee removes 1 light', () => {
+        service.vm.light = 3;
+        service.vm.judgeDance(FRESH_MOVE, 'shimee');
+        expect(service.vm.light).toBe(2);
+      });
+
+      it('determines that the shake removes 1 light', () => {
+        service.vm.light = 3;
+        service.vm.judgeDance(FRESH_MOVE, 'shake');
+        expect(service.vm.light).toBe(2);
+      });
+
+      it('determines that the yolo removes 2 light', () => {
+        service.vm.light = 3;
+        service.vm.judgeDance(FRESH_MOVE, 'yolo');
+        expect(service.vm.light).toBe(1);
+      });
     });
 
-    it('determines that the yolo brings back 2 light', () => {
-      service.vm.light = 3;
-      service.vm.judgeDance('yolo');
-      expect(service.vm.light).toBe(5);
-    });
-
-    it('no light is gained if it does not recognise the move', () => {
-      service.vm.light = 3;
-      service.vm.judgeDance('unknown');
-      expect(service.vm.light).toBe(3);
-    });
   });
 });

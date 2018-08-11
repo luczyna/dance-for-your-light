@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <EnergyLevel v-bind:limit="energyLimit" v-bind:amount="energy" />
-    <LightLevel  v-bind:limit="lightLimit" v-bind:amount="light" />
+    <LightLevel v-bind:limit="lightLimit" v-bind:amount="light" />
     <SNESButtons @sendMove="recieveMove"/>
 
     <ul v-if="messages.length">
@@ -50,24 +50,22 @@ export default {
   },
   methods: {
     recieveMove(which) {
-      this.log(which);
+      this.logMove(which);
 
-      const match = this.detectMove();
-      if (!match) return;
+      const results = this.detectMove();
+      if (!results.match) return;
 
-      const energyBurn = this.calculateEnergyBurn(match.danceMatch);
+      const energyBurn = this.calculateEnergyBurn(results.match.name);
 
       if (energyBurn <= this.energy) {
-        this.messages.push(`danced the ${match.danceMatch}`);
         this.decreaseEnergy(energyBurn);
-        // TODO manage the light
+        const response = this.judgeDance(results.useful, results.match.name);
+        this.messages.push(response);
+
       } else {
         // TODO alternate messages!
         this.messages.push(`too tired...`);
       }
-    },
-    logDanceMatch(move) {
-      console.log(move);
     }
   }
 }
