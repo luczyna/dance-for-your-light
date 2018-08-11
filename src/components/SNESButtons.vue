@@ -1,23 +1,39 @@
 <template>
-  <div class="button-container">
-    <div class="column left">
-      <button type="button" @click="buttonPress('a')" class="control" data-control="a">a</button>
-      <button type="button" @click="buttonPress('b')" class="control" data-control="b">b</button>
+  <div>
+    <div class="button-container">
+      <div class="column left">
+        <button type="button" @click="buttonPress('a')" class="control" data-control="a">a</button>
+        <button type="button" @click="buttonPress('b')" class="control" data-control="b">b</button>
+      </div>
+
+      <div class="column right">
+        <button type="button" @click="buttonPress('c')" class="control" data-control="c">c</button>
+        <button type="button" @click="buttonPress('d')" class="control" data-control="d">d</button>
+      </div>
     </div>
 
-    <div class="column right">
-      <button type="button" @click="buttonPress('c')" class="control" data-control="c">c</button>
-      <button type="button" @click="buttonPress('d')" class="control" data-control="d">d</button>
-    </div>
+    <ul v-if="logList.length">
+      <li v-for="(log, index) in lastLogSet" v-bind:key="index">{{log}}</li>
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
   name: 'SNESButtons',
+  data: function() {
+    return {
+      logList: []
+    };
+  },
+  computed: {
+    lastLogSet: function() {
+      return this.logList.slice(-10).reverse();
+    }
+  },
   methods: {
     buttonPress(which) {
-      console.log(`${which} was pressed`);
+      this.logList.push(`${which} was pressed`);
     }
   }
 }
