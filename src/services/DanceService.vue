@@ -13,7 +13,6 @@ export default {
   methods: {
     log(which) {
       this.keylog.push(which);
-      this.detectMove();
     },
     detectMove() {
       const matchShimee = this.keylog.slice(-(SHIMEE.length)).toString() === SHIMEE.toString();
@@ -21,11 +20,13 @@ export default {
       const matchYolo = this.keylog.slice(-(YOLO.length)).toString() === YOLO.toString();
 
       if (matchShimee) {
-        this.$emit('danceMatch', 'shimee');
+        return { danceMatch: 'shimee' };
       } else if (matchShake) {
-        this.$emit('danceMatch', 'shake');
+        return { danceMatch: 'shake' };
       } else if (matchYolo) {
-        this.$emit('danceMatch', 'yolo');
+        return { danceMatch: 'yolo' };
+      } else {
+        return null;
       }
     }
   }
