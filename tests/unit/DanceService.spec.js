@@ -29,7 +29,7 @@ describe('Dancing at Game', () => {
       service.vm.logMove('b');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('shimee');
+      expect(service.vm.detectMove().match.name).toBe('shimee');
     });
 
     it('detects the move when preceeded with other moves', () => {
@@ -40,7 +40,7 @@ describe('Dancing at Game', () => {
       service.vm.logMove('b');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('shimee');
+      expect(service.vm.detectMove().match.name).toBe('shimee');
     });
 
     it('ignores mismatches to the SHIMEE', () => {
@@ -48,7 +48,7 @@ describe('Dancing at Game', () => {
       service.vm.logMove('a');
       service.vm.logMove('d');
 
-      expect(service.vm.detectMove()).toBeNull();
+      expect(service.vm.detectMove().match).toBeNull();
     });
   });
 
@@ -59,7 +59,7 @@ describe('Dancing at Game', () => {
       service.vm.logMove('c');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('shake');
+      expect(service.vm.detectMove().match.name).toBe('shake');
     });
 
     it('detects the move when preceeded with other moves', () => {
@@ -70,7 +70,7 @@ describe('Dancing at Game', () => {
       service.vm.logMove('c');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('shake');
+      expect(service.vm.detectMove().match.name).toBe('shake');
     });
 
     it('ignores mismatches to the SHAKE', () => {
@@ -78,7 +78,7 @@ describe('Dancing at Game', () => {
       service.vm.logMove('a');
       service.vm.logMove('d');
 
-      expect(service.vm.detectMove()).toBeNull();
+      expect(service.vm.detectMove().match).toBeNull();
     });
   });
 
@@ -90,7 +90,7 @@ describe('Dancing at Game', () => {
       service.vm.logMove('c');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('yolo');
+      expect(service.vm.detectMove().match.name).toBe('yolo');
     });
 
     it('detects the move when preceeded with other moves', () => {
@@ -101,7 +101,7 @@ describe('Dancing at Game', () => {
       service.vm.logMove('c');
 
       expect(service.vm.detectMove()).toBeDefined();
-      expect(service.vm.detectMove().danceMatch).toBe('yolo');
+      expect(service.vm.detectMove().match.name).toBe('yolo');
     });
 
     it('ignores mismatches to the YOLO', () => {
@@ -110,7 +110,24 @@ describe('Dancing at Game', () => {
       service.vm.logMove('a');
       service.vm.logMove('c');
 
-      expect(service.vm.detectMove()).toBeNull();
+      expect(service.vm.detectMove().match).toBeNull();
+    });
+  });
+
+  describe('diminishing returns', () => {
+    it('punishes players for spamming a dance', () => {
+      // play the SHIMEE move
+      service.vm.logMove('c');
+      service.vm.logMove('a');
+      service.vm.logMove('c');
+      service.vm.detectMove();
+
+      // now SPAM the SHIMEE move
+      service.vm.logMove('c');
+      service.vm.logMove('a');
+      service.vm.logMove('c');
+      const result = service.vm.detectMove();
+      expect(result.useful).toBe(false);
     });
   });
 });

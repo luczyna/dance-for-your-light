@@ -35,34 +35,34 @@ export default {
       window.clearInterval(this.lightLoop);
       this.lightLoop = null;
     },
-    judgeDance(isFreshMove, whichDance) {
-      let increaseBy;
+    judgeDance(isFreshMove, whichDanceName) {
+      let updateLightAmount;
       let message;
 
-      if (isFreshMove) {
-        switch (whichDance.name) {
-          case 'shimee':
-          increaseBy = SHIMEE;
-          message = 'shimee shimee ko ko bop';
-          break;
-          case 'shake':
-          increaseBy = SHAKE;
-          message = 'shake ya booty';
-          break;
-          case 'yolo':
-          increaseBy = YOLO;
-          message = 'this is a crazy move, YOLO';
-          break;
-          default:
-          increaseBy = 0;
-        }
+      switch (whichDanceName) {
+        case 'shimee':
+        updateLightAmount = SHIMEE;
+        message = 'shimee shimee ko ko bop';
+        break;
+        case 'shake':
+        updateLightAmount = SHAKE;
+        message = 'shake ya booty';
+        break;
+        case 'yolo':
+        updateLightAmount = YOLO;
+        message = 'this is a crazy move, YOLO';
+        break;
+        default:
+        updateLightAmount = 0;
+      }
 
-        this.increaseLight(increaseBy);
+      if (isFreshMove) {
+        this.increaseLight(updateLightAmount);
       } else {
         // TODO alternate phrases!
         message = 'move not phresh!';
         // TODO is this cruel?
-        this.decreaseLight();
+        this.decreaseLight(updateLightAmount);
       }
 
       return message;
