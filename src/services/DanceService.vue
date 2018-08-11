@@ -1,3 +1,4 @@
+<script>
 const SHIMEE = ['a', 'a', 'b'];
 const SHAKE = ['c', 'a', 'c'];
 const YOLO = ['d', 'a', 'a', 'c'];
@@ -15,3 +16,4 @@ export default {
     }
   }
 }
+</script>
