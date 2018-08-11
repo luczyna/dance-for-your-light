@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="button-container">
+    <div class="button-container" v>
       <div class="column left">
         <button type="button" @click="buttonPress('a')" class="control" data-control="a">a</button>
         <button type="button" @click="buttonPress('b')" class="control" data-control="b">b</button>
@@ -26,6 +26,13 @@ export default {
       logList: []
     };
   },
+  mounted() {
+    window.addEventListener('keyup', this.keyPressMapper);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyup', this.keyPressMapper);
+  },
+
   computed: {
     lastLogSet: function() {
       return this.logList.slice(-10).reverse();
@@ -34,6 +41,24 @@ export default {
   methods: {
     buttonPress(which) {
       this.logList.push(`${which} was pressed`);
+    },
+    keyPressMapper(event) {
+      switch (event.keyCode) {
+        case 37:
+          this.buttonPress('b');
+          break;
+        case 40:
+          this.buttonPress('d');
+          break;
+        case 38:
+          this.buttonPress('a');
+          break;
+        case 39:
+          this.buttonPress('c');
+          break;
+        default:
+          break;
+      }
     }
   }
 }
