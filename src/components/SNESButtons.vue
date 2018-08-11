@@ -53,6 +53,19 @@ export default {
   $pixel-border-size: 6px;
   $top-butt-margin: 5px;
 
+  // TODO move mixins to their own file
+  @mixin controlFocus($mainColor) {
+    &:focus {
+      background: darken($mainColor, 10%);
+      border-top-color: darken($mainColor, 25%);
+      border-bottom-color: darken($mainColor, 25%);
+
+      &:before, &:after {
+        background: darken($mainColor, 25%);
+      }
+    }
+  }
+
   .button-container {
     display: flex;
     margin: 0 auto;
@@ -100,6 +113,10 @@ export default {
       right: -$pixel-border-size;
     }
 
+    &:focus {
+      outline: none;
+    }
+
     &[data-control=a] {
       margin-bottom: $top-butt-margin;
       background: blue;
@@ -109,6 +126,8 @@ export default {
       &:before, &:after {
         background: darken(blue, 15%);
       }
+
+      @include controlFocus(blue);
     }
 
     &[data-control=b] {
@@ -119,6 +138,8 @@ export default {
       &:before, &:after {
         background: darken(lime, 15%);
       }
+
+      @include controlFocus(lime);
     }
 
     &[data-control=c] {
@@ -130,6 +151,8 @@ export default {
       &:before, &:after {
         background: darken(red, 15%);
       }
+
+      @include controlFocus(red);
     }
 
     &[data-control=d] {
@@ -140,6 +163,8 @@ export default {
       &:before, &:after {
         background: darken(yellow, 15%);
       }
+
+      @include controlFocus(yellow);
     }
   }
 </style>
