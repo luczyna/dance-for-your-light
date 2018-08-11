@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <div class="button-container" v>
-      <div class="column left">
-        <button type="button" @click="buttonPress('a')" class="control" v-bind:class="{'focus': focusOnA}" data-control="a">a</button>
-        <button type="button" @click="buttonPress('b')" class="control" v-bind:class="{'focus': focusOnB}" data-control="b">b</button>
-      </div>
+  <div class="button-container">
+    <div class="column left">
+      <button type="button" @click="buttonPress('a')" class="control" v-bind:class="{'focus': focusOnA}" data-control="a">a</button>
+      <button type="button" @click="buttonPress('b')" class="control" v-bind:class="{'focus': focusOnB}" data-control="b">b</button>
+    </div>
 
-      <div class="column right">
-        <button type="button" @click="buttonPress('c')" class="control" v-bind:class="{'focus': focusOnC}" data-control="c">c</button>
-        <button type="button" @click="buttonPress('d')" class="control" v-bind:class="{'focus': focusOnD}" data-control="d">d</button>
-      </div>
+    <div class="column right">
+      <button type="button" @click="buttonPress('c')" class="control" v-bind:class="{'focus': focusOnC}" data-control="c">c</button>
+      <button type="button" @click="buttonPress('d')" class="control" v-bind:class="{'focus': focusOnD}" data-control="d">d</button>
     </div>
   </div>
 </template>
