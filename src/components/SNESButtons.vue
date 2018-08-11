@@ -14,23 +14,34 @@
 
 <script>
 export default {
-  name: 'SNESButtons'
+  name: 'SNESButtons',
+  methods: {
+    buttonPress(which) {
+      console.log(`${which} was pressed`);
+    }
+  }
 }
 </script>
 
 <style lang="scss">
   $pixel-border-size: 6px;
+  $top-butt-margin: 5px;
 
   .button-container {
     display: flex;
     margin: 0 auto;
     width: 170px;
-    justify-content: space-around;
+    justify-content: space-evenly;
   }
 
   .column {
     display: flex;
     flex-direction: column;
+    transform: rotateZ(48deg);
+
+    &.right {
+      margin-top: 4.5em;
+    }
   }
 
   .control {
@@ -38,8 +49,9 @@ export default {
     text-align: center;
     padding: 15px 20px;
     margin: 0;
+    height: 70px;
+    width: 70px - (2 * $pixel-border-size);
     font-family: monospace;
-
 
     // THX https://codepen.io/darcy/pen/yGocb
     border-top-width: $pixel-border-size;
@@ -63,8 +75,8 @@ export default {
     }
 
     &[data-control=a] {
+      margin-bottom: $top-butt-margin;
       background: blue;
-      margin-bottom: 1em;
       border-top-color: darken(blue, 15%);
       border-bottom-color: darken(blue, 15%);
 
@@ -84,8 +96,8 @@ export default {
     }
 
     &[data-control=c] {
+      margin-bottom: $top-butt-margin;
       background: red;
-      margin-bottom: 1em;
       border-top-color: darken(red, 15%);
       border-bottom-color: darken(red, 15%);
 
