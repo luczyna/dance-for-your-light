@@ -41,6 +41,7 @@ export default {
   methods: {
     buttonPress(which) {
       this.logList.push(`${which} was pressed`);
+      this.$emit('sendMove', which);
     },
     keyPressMapper(event) {
       switch (event.keyCode) {
