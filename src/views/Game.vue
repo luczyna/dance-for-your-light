@@ -3,7 +3,7 @@
     <EnergyLevel v-bind:limit="energyLimit" v-bind:amount="energy" />
     <LightLevel v-bind:limit="lightLimit" v-bind:amount="light" />
 
-    <p>game over? {{gameOver}}</p>
+    <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
     <SNESButtons @sendMove="recieveMove"/>
 
     <ul v-if="messages.length">
@@ -14,6 +14,7 @@
 
 <script>
 import EnergyLevel from '@/components/EnergyLevel.vue';
+import GameOver from '@/components/GameOver.vue';
 import LightLevel from '@/components/LightLevel.vue';
 import SNESButtons from '@/components/SNESButtons.vue';
 import DanceService from '@/services/DanceService.vue';
@@ -29,6 +30,7 @@ export default {
   ],
   components: {
     EnergyLevel,
+    GameOver,
     LightLevel,
     SNESButtons
   },
