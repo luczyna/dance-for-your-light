@@ -3,6 +3,7 @@
     <EnergyLevel v-bind:limit="energyLimit" v-bind:amount="energy" />
     <LightLevel v-bind:limit="lightLimit" v-bind:amount="light" />
 
+    <!-- <p><a target="_blank" v-bind:href="tweet">Twieet yur sc0r3</a></p> -->
     <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
     <SNESButtons @sendMove="recieveMove"/>
 
@@ -59,6 +60,13 @@ export default {
   computed: {
     lastMessages: function() {
       return this.messages.slice(-10).reverse();
+    },
+    tweet: function() {
+      const fake = '87 seconds'
+      let url = 'https://twitter.com/intent/tweet?text=';
+      url += encodeURI(`I danced for ${fake} in Dance for your Life, by @tropvache! Sweet!`);
+
+      return url;
     }
   },
   methods: {
