@@ -39,7 +39,7 @@ BG.A6.src = '/img/bg/bg2a.JPG';
 BG.B6.src = '/img/bg/bg2b.JPG';
 BG.A7.src = '/img/bg/bg1a.JPG';
 BG.B7.src = '/img/bg/bg1b.JPG';
-
+let animationReference;
 export default {
   name: 'LightLevel',
   props: {
@@ -51,8 +51,7 @@ export default {
       ctx: null,
       lightTick: 0,
       lightFrame: 0,
-      width: 0,
-      animation: null
+      width: 0
     };
   },
   mounted() {
@@ -64,16 +63,16 @@ export default {
     this.width = width;
 
     if (this.runAnimation) {
-      // this.startDrawing();
+      this.startDrawing();
     }
   },
   watch: {
     runAnimation: function() {
-      console.log('game changed');
-      if (this.runAnimation) {
-        this.startDrawing();
-      } else {
+      if (!this.runAnimation) {
         this.stopDrawing();
+      } else {
+        // TODO explore if we'll ever need this check
+        // this.startDrawing();
       }
     }
   },
@@ -82,8 +81,6 @@ export default {
       this.ctx.clearRect(0, 0, this.width, this.height);
     },
     composeFrame() {
-      window.requestAnimationFrame(this.composeFrame);
-
       this.clearCanvas();
       this.drawBackground();
 
@@ -94,21 +91,22 @@ export default {
         // switch 0 for 1 and vice versa, we only have 2 frames
         this.lightFrame = (this.lightFrame) ? 0 : 1;
       }
+
+      animationReference = requestAnimationFrame(this.composeFrame);
     },
     drawBackground() {
       const imageVersion = (this.lightFrame) ? 'A' : 'B';
-      const imageKey = imageVersion + this.light;
+      const imageLevel = (this.light === 0) ? 1 : this.light;
+      const imageKey = imageVersion + imageLevel;
 
       const whichImage = BG[imageKey];
       this.ctx.drawImage(whichImage, 0, 0, 900, 900, 0, 0, this.width, this.width);
     },
     startDrawing() {
-      this.animation = window.requestAnimationFrame(this.composeFrame);
+      animationReference = requestAnimationFrame(this.composeFrame);
     },
     stopDrawing() {
-      console.log('ANIMATION STOPPED');
-      window.cancelAnimationFrame(this.animation);
-      this.animation = null;
+      cancelAnimationFrame(animationReference);
     }
   }
 }
