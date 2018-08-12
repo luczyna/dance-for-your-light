@@ -1,14 +1,10 @@
 <template>
   <div class="control-container">
-    <div class="column left">
       <button type="button" @click="buttonPress('a')" class="control button" v-bind:class="{'focus': focusOnA}" data-control="a">a</button>
       <button type="button" @click="buttonPress('b')" class="control button" v-bind:class="{'focus': focusOnB}" data-control="b">b</button>
-    </div>
 
-    <div class="column right">
       <button type="button" @click="buttonPress('c')" class="control button" v-bind:class="{'focus': focusOnC}" data-control="c">c</button>
       <button type="button" @click="buttonPress('d')" class="control button" v-bind:class="{'focus': focusOnD}" data-control="d">d</button>
-    </div>
   </div>
 </template>
 
@@ -35,25 +31,25 @@ export default {
     },
     keyPressMapper(event) {
       switch (event.keyCode) {
-        case 37:
-          this.buttonPress('b');
-          this.focusOnB = true;
-          this.resetFocus('focusOnB');
-          break;
-        case 40:
-          this.buttonPress('d');
-          this.focusOnD = true;
-          this.resetFocus('focusOnD');
-          break;
-        case 38:
+        case 49:
           this.buttonPress('a');
           this.focusOnA = true;
           this.resetFocus('focusOnA');
           break;
-        case 39:
+        case 50:
+          this.buttonPress('b');
+          this.focusOnB = true;
+          this.resetFocus('focusOnB');
+          break;
+        case 51:
           this.buttonPress('c');
           this.focusOnC = true;
           this.resetFocus('focusOnC');
+          break;
+        case 52:
+          this.buttonPress('d');
+          this.focusOnD = true;
+          this.resetFocus('focusOnD');
           break;
         default:
           break;
@@ -75,28 +71,16 @@ export default {
 
   .control-container {
     display: flex;
-    margin: -2em auto -1em;
-    width: 136px;
-    justify-content: space-evenly;
-    // give it a little nudge over, the rotation of the children knock the center alignment off a little
-    transform: translateX(-10px)
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    transform: rotateZ(44deg);
-
-    &.right {
-      margin-top: 3em;
-    }
+    margin: 0 auto;
+    justify-content: space-between;
   }
 
   .control {
     font-size: 1.25em;
-    margin: 0;
+    margin: 0 (2 * $pixel-border-size);
     height: 55px;
     width: 55px - (2 * $pixel-border-size);
+    flex: 1 0 auto;
 
     &[data-control=a] {
       margin-bottom: $top-butt-margin;
