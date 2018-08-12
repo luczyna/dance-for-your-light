@@ -5,6 +5,7 @@
 
     <!-- <p><a target="_blank" v-bind:href="tweet">Twieet yur sc0r3</a></p> -->
     <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
+    <GameScreen v-bind:light="light" v-bind:runAnimation="!gameOver" />
     <SNESButtons @sendMove="recieveMove"/>
 
     <ul v-if="messages.length">
@@ -15,6 +16,7 @@
 
 <script>
 import EnergyLevel from '@/components/EnergyLevel.vue';
+import GameScreen from '@/components/GameScreen.vue';
 import GameOver from '@/components/GameOver.vue';
 import LightLevel from '@/components/LightLevel.vue';
 import SNESButtons from '@/components/SNESButtons.vue';
@@ -31,6 +33,7 @@ export default {
   ],
   components: {
     EnergyLevel,
+    GameScreen,
     GameOver,
     LightLevel,
     SNESButtons
