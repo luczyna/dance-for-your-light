@@ -5,6 +5,7 @@
       <LightLevel v-bind:limit="lightLimit" v-bind:amount="light" />
     </div>
 
+    <p class="centered" v-if="!gameStart"><button class="button" type="button" @click="startGame">start dancing</button></p>
     <div class="elements">
       <!-- <p><a target="_blank" v-bind:href="tweet">Twieet yur sc0r3</a></p> -->
       <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
@@ -56,11 +57,9 @@ export default {
       this.stopGame();
     }
   },
-  mounted() {
-    this.startEnergyLoop();
-    this.startLightLoop();
-    this.gameStart = Date.now();
-  },
+  // mounted() {
+  //   this.startGame();
+  // },
   beforeDestroy() {
     this.stopGame();
   },
@@ -78,6 +77,8 @@ export default {
   },
   methods: {
     recieveMove(which) {
+      if (!this.gameStart) return;
+
       this.logMove(which);
 
       const results = this.detectMove();
@@ -94,6 +95,11 @@ export default {
         // TODO alternate messages!
         this.messages.push(`too tired...`);
       }
+    },
+    startGame() {
+      this.startEnergyLoop();
+      this.startLightLoop();
+      this.gameStart = Date.now();
     },
     stopGame() {
       this.stopEnergyLoop();
