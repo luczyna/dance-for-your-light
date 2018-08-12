@@ -10,11 +10,9 @@
       <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
       <GameScreen v-bind:light="light" v-bind:runAnimation="!gameOver" />
       <SNESButtons @sendMove="recieveMove"/>
-    </div>
 
-    <ul v-if="messages.length">
-      <li v-for="(log, index) in lastMessages" v-bind:key="index">{{log}}</li>
-    </ul>
+      <MessageList v-if="messages.length" v-bind:messages="lastMessages" />
+    </div>
   </div>
 </template>
 
@@ -23,6 +21,7 @@ import EnergyLevel from '@/components/EnergyLevel.vue';
 import GameScreen from '@/components/GameScreen.vue';
 import GameOver from '@/components/GameOver.vue';
 import LightLevel from '@/components/LightLevel.vue';
+import MessageList from '@/components/MessageList.vue';
 import SNESButtons from '@/components/SNESButtons.vue';
 import DanceService from '@/services/DanceService.vue';
 import LightService from '@/services/LightService.vue';
@@ -40,6 +39,7 @@ export default {
     GameScreen,
     GameOver,
     LightLevel,
+    MessageList,
     SNESButtons
   },
   data: function() {
