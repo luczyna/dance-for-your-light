@@ -15,10 +15,17 @@ export default {
     };
   },
   methods: {
+    checkLightLevel() {
+      if (!this.light) {
+        // GAME OVER
+        this.gameEnd = Date.now();
+      }
+    },
     decreaseLight(amount = 1) {
       this.light -= amount;
 
       this.light = Math.max(this.light, 0);
+      this.checkLightLevel();
     },
     increaseLight(amount = 1) {
       this.light += amount;
@@ -28,7 +35,6 @@ export default {
     startLightLoop() {
       this.lightLoop = window.setInterval(() => {
         this.decreaseLight();
-        // TODO add checks! no light === GAME OVER
       }, TIME);
     },
     stopLightLoop() {
