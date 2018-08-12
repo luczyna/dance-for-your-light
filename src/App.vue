@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Game</router-link>
-      <router-link to="/about">About</router-link>
+      <router-link :to="{name: 'home'}">Home</router-link>
+      <router-link :to="{name: 'game'}">Dance</router-link>
+      <router-link :to="{name: 'about'}">About</router-link>
+      <router-link :to="{name: 'learn'}">Learn</router-link>
     </div>
     <router-view/>
   </div>
