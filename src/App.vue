@@ -1,29 +1,30 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <p class="nav">
       <router-link :to="{name: 'home'}">Home</router-link>
       <router-link :to="{name: 'game'}">Dance</router-link>
       <router-link :to="{name: 'about'}">About</router-link>
       <router-link :to="{name: 'learn'}">Learn</router-link>
-    </div>
+    </p>
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: monospace;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import "@/assets/variables.scss";
 
-#nav {
-  margin: 0 auto 1em;
+.nav {
+  text-align: center;
+
   a {
-    color: #2c3e50;
     margin-right: 1em;
+
     &.router-link-exact-active {
-      color: #42b983;
+      color: $pop;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
     }
   }
 }

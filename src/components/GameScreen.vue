@@ -119,7 +119,6 @@ export default {
 
   canvas {
     margin: 0 auto;
-    border: 1px #cecece solid;
     display: block;
   }
 </style>
