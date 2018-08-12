@@ -1,0 +1,23 @@
+@mixin pixel-button-variation($color) {
+  $pixel-border-size: 5px;
+
+  background: $color;
+  border-top-color: darken($color, 15%);
+  border-bottom-color: darken($color, 15%);
+
+  &:before, &:after {
+    background: darken($color, 15%);
+  }
+
+  &:focus,
+  &.focus {
+    outline: none;
+    background: darken($color, 10%);
+    border-top-color: darken($color, 25%);
+    border-bottom-color: darken($color, 25%);
+
+    &:before, &:after {
+      background: darken($color, 25%);
+    }
+  }
+}

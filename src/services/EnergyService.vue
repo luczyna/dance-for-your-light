@@ -35,20 +35,23 @@ export default {
       this.energyLoop = null;
     },
     calculateEnergyBurn(whichMove) {
+      let moveCost;
       switch (whichMove) {
         case 'shimee':
-          return SHIMEE;
+          moveCost = SHIMEE;
           break;
         case 'shake':
-          return SHAKE;
+          moveCost = SHAKE;
           break;
         case 'yolo':
-          return YOLO;
+          moveCost = YOLO;
           break;
         default:
-          return 0;
+          moveCost = 0;
           break;
       }
+
+      return moveCost;
     }
   }
 }

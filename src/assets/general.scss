@@ -1,0 +1,19 @@
+html,
+body {
+  font-family: $font;
+  background: $black;
+  color: $off-white;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

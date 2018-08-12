@@ -1,22 +1,27 @@
 <template>
-  <div>
-    <EnergyLevel v-bind:limit="energyLimit" v-bind:amount="energy" />
-    <LightLevel v-bind:limit="lightLimit" v-bind:amount="light" />
+  <div class="game">
+    <div class="levels">
+      <EnergyLevel v-bind:limit="energyLimit" v-bind:amount="energy" />
+      <LightLevel v-bind:limit="lightLimit" v-bind:amount="light" />
+    </div>
 
-    <!-- <p><a target="_blank" v-bind:href="tweet">Twieet yur sc0r3</a></p> -->
-    <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
-    <SNESButtons @sendMove="recieveMove"/>
+    <div class="elements">
+      <!-- <p><a target="_blank" v-bind:href="tweet">Twieet yur sc0r3</a></p> -->
+      <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
+      <GameScreen v-bind:light="light" v-bind:runAnimation="!gameOver" />
+      <SNESButtons @sendMove="recieveMove"/>
 
-    <ul v-if="messages.length">
-      <li v-for="(log, index) in lastMessages" v-bind:key="index">{{log}}</li>
-    </ul>
+      <MessageList v-if="messages.length" v-bind:messages="lastMessages" />
+    </div>
   </div>
 </template>
 
 <script>
 import EnergyLevel from '@/components/EnergyLevel.vue';
+import GameScreen from '@/components/GameScreen.vue';
 import GameOver from '@/components/GameOver.vue';
 import LightLevel from '@/components/LightLevel.vue';
+import MessageList from '@/components/MessageList.vue';
 import SNESButtons from '@/components/SNESButtons.vue';
 import DanceService from '@/services/DanceService.vue';
 import LightService from '@/services/LightService.vue';
@@ -31,8 +36,10 @@ export default {
   ],
   components: {
     EnergyLevel,
+    GameScreen,
     GameOver,
     LightLevel,
+    MessageList,
     SNESButtons
   },
   data: function() {
@@ -95,3 +102,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.levels {
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto 1em;
+}
+
+.elements {
+  position: relative;
+}
+</style>

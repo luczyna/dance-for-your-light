@@ -20,10 +20,10 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "@/assets/variables.scss";
+
   .light-container {
-    // TODO update with new elements or use a $var
-    width: 170px;
-    margin: 0 auto 1em;
+    width: 47%;
     text-align: right;
   }
 
@@ -31,14 +31,14 @@ export default {
     display: flex;
     justify-content: flex-end;
     flex-direction: row-reverse;
-    height: 16px;
+    height: $level-height;
   }
 
   .light {
-    border: 1px solid black;
+    border: 1px solid $black;
     width: 1px;
     flex: 1 0 auto;
-    background: black;
+    background: $black;
 
     &:first-of-type {
       border-right-width: 2px;
@@ -49,7 +49,7 @@ export default {
     }
 
     &.bright {
-      background: white;
+      background: $white;
     }
   }
 </style>
