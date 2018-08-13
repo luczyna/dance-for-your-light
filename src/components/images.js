@@ -50,10 +50,10 @@ BG.B7.src = '/img/bg/bg1b.JPG';
 
 CHAR.still1.src = '/img/character/still-a.PNG';
 CHAR.still2.src = '/img/character/still-b.PNG';
-CHAR.movea.src = '/img/character/move-a.PNG';
+CHAR.movea.src = '/img/character/move-d.PNG';
 CHAR.moveb.src = '/img/character/move-b.PNG';
 CHAR.movec.src = '/img/character/move-c.PNG';
-CHAR.moved.src = '/img/character/move-d.PNG';
+CHAR.moved.src = '/img/character/move-a.PNG';
 CHAR.shimee1.src = '/img/character/shimee-a.PNG';
 CHAR.shimee2.src = '/img/character/shimee-b.PNG';
 CHAR.shake1.src = '/img/character/shake-a.PNG';

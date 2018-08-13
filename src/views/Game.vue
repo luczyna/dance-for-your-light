@@ -9,7 +9,7 @@
     <div class="elements">
       <!-- <p><a target="_blank" v-bind:href="tweet">Twieet yur sc0r3</a></p> -->
       <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
-      <GameScreen v-bind:light="light" v-bind:runAnimation="!gameOver" />
+      <GameScreen v-bind:light="light" v-bind:runAnimation="!gameOver" v-bind:moves="moveLineup" />
       <SNESButtons @sendMove="recieveMove"/>
 
       <MessageList v-if="messages.length" v-bind:messages="lastMessages" />
@@ -48,7 +48,8 @@ export default {
       messages: [],
       gameStart: null,
       gameEnd: null,
-      gameOver: false
+      gameOver: false,
+      moveLineup: []
     };
   },
   watch: {
@@ -77,6 +78,7 @@ export default {
   },
   methods: {
     recieveMove(which) {
+      this.moveLineup.push({type: 'move', value: which});
       if (!this.gameStart) return;
 
       this.logMove(which);
@@ -87,6 +89,7 @@ export default {
       const energyBurn = this.calculateEnergyBurn(results.match.name);
 
       if (energyBurn <= this.energy) {
+        this.moveLineup.push({type: 'dance', value: results.match.name});
         this.decreaseEnergy(energyBurn);
         const response = this.judgeDance(results.useful, results.match.name);
         this.messages.push(response);
