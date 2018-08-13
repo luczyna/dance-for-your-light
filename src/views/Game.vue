@@ -5,8 +5,9 @@
       <LightLevel v-bind:limit="lightLimit" v-bind:amount="light" />
     </div>
 
-    <p class="centered" v-if="!gameStart"><button class="button" type="button" @click="startGame">start dancing</button></p>
     <div class="elements">
+      <p class="centered play-ball" v-if="!gameStart"><button class="button" type="button" @click="startGame">start dancing</button></p>
+
       <!-- <p><a target="_blank" v-bind:href="tweet">Twieet yur sc0r3</a></p> -->
       <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
       <GameScreen v-bind:light="light" v-bind:runAnimation="!gameOver" v-bind:moves="moveLineup" />
@@ -122,5 +123,12 @@ export default {
 
 .elements {
   position: relative;
+}
+
+.play-ball {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 100%;
 }
 </style>

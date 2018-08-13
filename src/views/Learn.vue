@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <h1>How to Dance</h1>
     <p>You put your left foot in, you put your left foot out...</p>
 
