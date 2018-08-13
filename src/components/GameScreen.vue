@@ -34,7 +34,11 @@ export default {
     };
   },
   mounted() {
-    const width = window.innerWidth - (window.innerWidth % 100);
+    let width = window.innerWidth - (window.innerWidth % 100);
+    if (width > 500) {
+      width = 500;
+    }
+
 
     this.ctx = this.$refs.canvas.getContext('2d');
     this.$refs.canvas.width = width;
