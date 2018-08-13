@@ -39,7 +39,6 @@ export default {
       width = 500;
     }
 
-
     this.ctx = this.$refs.canvas.getContext('2d');
     this.$refs.canvas.width = width;
     this.$refs.canvas.height = width;

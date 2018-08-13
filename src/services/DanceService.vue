@@ -14,6 +14,11 @@ const YOLO = {
   cooldown: 4000,
   name: 'yolo'
 };
+const STUN = {
+  moves: ['c', 'd', 'a', 'b'],
+  cooldown: 5000,
+  name: 'stun'
+};
 
 export default {
   name: 'DanceService',
@@ -23,7 +28,8 @@ export default {
       danceCoolDown: {
         shimee: null,
         shake: null,
-        yolo: null
+        yolo: null,
+        stun: null
       }
     };
   },
@@ -37,7 +43,7 @@ export default {
       let matchedMove = null;
       let result = { match: matchedMove, useful: isUseful };
 
-      let checkThese = [SHIMEE, SHAKE, YOLO];
+      let checkThese = [SHIMEE, SHAKE, YOLO, STUN];
       checkThese.forEach((move) => {
         if (!isMatch) {
           isMatch = this.findDanceMatch(move);
