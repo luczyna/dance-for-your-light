@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <h1>Dance for your Light</h1>
+  <div class="page">
+    <p class="centered"><img src="img/dance-for-your-life-luczynski.PNG" alt="don't get crushed without your light" class="centered-image" /></p>
+    <h1 class="centered">Dance for your Light</h1>
 
-    <p><router-link :to="{name: 'learn'}">learn</router-link> or <router-link :to="{name: 'game'}">get dancing</router-link></p>
+    <p class="centered"><router-link :to="{name: 'learn'}">learn</router-link> or <router-link :to="{name: 'game'}">get dancing</router-link></p>
   </div>
 </template>

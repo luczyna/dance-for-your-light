@@ -1,22 +1,29 @@
 <template>
-  <div>
-    <EnergyLevel v-bind:limit="energyLimit" v-bind:amount="energy" />
-    <LightLevel v-bind:limit="lightLimit" v-bind:amount="light" />
+  <div class="game">
+    <div class="levels">
+      <EnergyLevel v-bind:limit="energyLimit" v-bind:amount="energy" />
+      <LightLevel v-bind:limit="lightLimit" v-bind:amount="light" />
+    </div>
 
-    <!-- <p><a target="_blank" v-bind:href="tweet">Twieet yur sc0r3</a></p> -->
-    <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
-    <SNESButtons @sendMove="recieveMove"/>
+    <div class="elements">
+      <p class="centered play-ball" v-if="!gameStart"><button class="button" type="button" @click="startGame">start dancing</button></p>
 
-    <ul v-if="messages.length">
-      <li v-for="(log, index) in lastMessages" v-bind:key="index">{{log}}</li>
-    </ul>
+      <!-- <p><a target="_blank" v-bind:href="tweet">Twieet yur sc0r3</a></p> -->
+      <GameOver v-if="gameOver" v-bind:gameStart="gameStart" v-bind:gameEnd="gameEnd" />
+      <GameScreen v-bind:light="light" v-bind:runAnimation="!gameOver" v-bind:moves="moveLineup" />
+      <SNESButtons @sendMove="recieveMove"/>
+
+      <MessageList v-if="messages.length" v-bind:messages="lastMessages" />
+    </div>
   </div>
 </template>
 
 <script>
 import EnergyLevel from '@/components/EnergyLevel.vue';
+import GameScreen from '@/components/GameScreen.vue';
 import GameOver from '@/components/GameOver.vue';
 import LightLevel from '@/components/LightLevel.vue';
+import MessageList from '@/components/MessageList.vue';
 import SNESButtons from '@/components/SNESButtons.vue';
 import DanceService from '@/services/DanceService.vue';
 import LightService from '@/services/LightService.vue';
@@ -31,8 +38,10 @@ export default {
   ],
   components: {
     EnergyLevel,
+    GameScreen,
     GameOver,
     LightLevel,
+    MessageList,
     SNESButtons
   },
   data: function() {
@@ -40,7 +49,8 @@ export default {
       messages: [],
       gameStart: null,
       gameEnd: null,
-      gameOver: false
+      gameOver: false,
+      moveLineup: []
     };
   },
   watch: {
@@ -49,11 +59,9 @@ export default {
       this.stopGame();
     }
   },
-  mounted() {
-    this.startEnergyLoop();
-    this.startLightLoop();
-    this.gameStart = Date.now();
-  },
+  // mounted() {
+  //   this.startGame();
+  // },
   beforeDestroy() {
     this.stopGame();
   },
@@ -71,6 +79,9 @@ export default {
   },
   methods: {
     recieveMove(which) {
+      this.moveLineup.push({type: 'move', value: which});
+      if (!this.gameStart) return;
+
       this.logMove(which);
 
       const results = this.detectMove();
@@ -79,6 +90,7 @@ export default {
       const energyBurn = this.calculateEnergyBurn(results.match.name);
 
       if (energyBurn <= this.energy) {
+        this.moveLineup.push({type: 'dance', value: results.match.name});
         this.decreaseEnergy(energyBurn);
         const response = this.judgeDance(results.useful, results.match.name);
         this.messages.push(response);
@@ -88,6 +100,11 @@ export default {
         this.messages.push(`too tired...`);
       }
     },
+    startGame() {
+      this.startEnergyLoop();
+      this.startLightLoop();
+      this.gameStart = Date.now();
+    },
     stopGame() {
       this.stopEnergyLoop();
       this.stopLightLoop();
@@ -95,3 +112,23 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.levels {
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto 1em;
+}
+
+.elements {
+  position: relative;
+}
+
+.play-ball {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 100%;
+}
+</style>

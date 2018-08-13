@@ -1,0 +1,14 @@
+$font: 'IBM Plex Mono', monospace;
+
+$white: white;
+$off-white: darken($white, 10%);
+$black: black;
+$off-black: lighten(black, 15%);
+
+$pop: tomato;
+$pop-light1: lighten($pop, 10%);
+$pop-light2: lighten($pop, 20%);
+$pop-dark1: darken($pop, 10%);
+$pop-dark2: darken($pop, 20%);
+
+$level-height: 12px;

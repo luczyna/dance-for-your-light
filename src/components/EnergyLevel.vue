@@ -20,20 +20,20 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "@/assets/variables.scss";
+
   .energy-container {
-    // TODO update with new elements or use a $var
-    width: 170px;
-    margin: 0 auto 1em;
+    width: 47%;
   }
 
   .energy-level {
     display: flex;
     justify-content: flex-start;
-    height: 16px;
+    height: $level-height;
   }
 
   .energy {
-    border: 1px solid black;
+    border: 1px solid $black;
     width: 1px;
     flex: 1 0 auto;
 

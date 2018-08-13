@@ -4,6 +4,7 @@ const TIME = 3000;
 const SHIMEE = 2;
 const SHAKE = 2;
 const YOLO = 3;
+const STUN = 4;
 
 export default {
   name: 'EnergyService',
@@ -35,20 +36,26 @@ export default {
       this.energyLoop = null;
     },
     calculateEnergyBurn(whichMove) {
+      let moveCost;
       switch (whichMove) {
         case 'shimee':
-          return SHIMEE;
+          moveCost = SHIMEE;
           break;
         case 'shake':
-          return SHAKE;
+          moveCost = SHAKE;
           break;
         case 'yolo':
-          return YOLO;
+          moveCost = YOLO;
+          break;
+        case 'stun':
+          moveCost = STUN;
           break;
         default:
-          return 0;
+          moveCost = 0;
           break;
       }
+
+      return moveCost;
     }
   }
 }

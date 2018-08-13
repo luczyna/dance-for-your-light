@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h1>Game Over</h1>
+  <div class="game-over">
+    <h1>Game Over :(</h1>
     <p>you danced for {{gameLength}}</p>
-    <p><button type="button" @click="reloadGame">start dancing again</button></p>
+    <p><button class="button" type="button" @click="reloadGame">start dancing again</button></p>
   </div>
 </template>
 
@@ -29,5 +29,15 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "@/assets/variables.scss";
 
+  .game-over {
+    border: 2px solid $white;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    width: 90%;
+    left: 5%;
+    background: $black;
+  }
 </style>

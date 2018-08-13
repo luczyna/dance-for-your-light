@@ -4,6 +4,7 @@ const TIME = 5000;
 const SHIMEE = 1;
 const SHAKE = 1;
 const YOLO = 2;
+const STUN = 3;
 
 export default {
   name: 'EnergyService',
@@ -47,19 +48,23 @@ export default {
 
       switch (whichDanceName) {
         case 'shimee':
-        updateLightAmount = SHIMEE;
-        message = 'shimee shimee ko ko bop';
-        break;
+          updateLightAmount = SHIMEE;
+          message = 'shimee shimee ko ko bop';
+          break;
         case 'shake':
-        updateLightAmount = SHAKE;
-        message = 'shake ya booty';
-        break;
+          updateLightAmount = SHAKE;
+          message = 'shake ya booty';
+          break;
         case 'yolo':
-        updateLightAmount = YOLO;
-        message = 'this is a crazy move, YOLO';
-        break;
+          updateLightAmount = YOLO;
+          message = 'this is a crazy move, YOLO';
+          break;
+        case 'stun':
+          updateLightAmount = STUN;
+          message = 'hiya!';
+          break;
         default:
-        updateLightAmount = 0;
+          updateLightAmount = 0;
       }
 
       if (isFreshMove) {
