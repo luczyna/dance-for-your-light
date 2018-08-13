@@ -10,6 +10,7 @@
     "testsforlife": "vue-cli-service test:unit --watch"
   },
   "dependencies": {
+    "http-server": "^0.11.1",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1"
