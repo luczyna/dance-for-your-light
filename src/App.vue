@@ -3,8 +3,8 @@
     <p class="nav">
       <router-link :to="{name: 'home'}">Home</router-link>
       <router-link :to="{name: 'game'}">Dance</router-link>
-      <router-link :to="{name: 'about'}">About</router-link>
       <router-link :to="{name: 'learn'}">Learn</router-link>
+      <router-link :to="{name: 'about'}">About</router-link>
     </p>
     <router-view/>
   </div>

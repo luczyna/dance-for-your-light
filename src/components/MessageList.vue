@@ -1,5 +1,5 @@
 <template>
-  <ul class="message-container">
+  <ul class="message-container page">
     <li v-for="(log, index) in messages" v-bind:key="index">{{log}}</li>
   </ul>
 </template>
@@ -19,6 +19,7 @@ export default {
   .message-container {
     padding: 0;
     margin: 1em auto;
+    list-style: none;
 
     li {
       padding: 5px 0 4px;

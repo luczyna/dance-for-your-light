@@ -4,6 +4,7 @@ const TIME = 3000;
 const SHIMEE = 2;
 const SHAKE = 2;
 const YOLO = 3;
+const STUN = 4;
 
 export default {
   name: 'EnergyService',
@@ -45,6 +46,9 @@ export default {
           break;
         case 'yolo':
           moveCost = YOLO;
+          break;
+        case 'stun':
+          moveCost = STUN;
           break;
         default:
           moveCost = 0;
